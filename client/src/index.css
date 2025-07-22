@@ -1,0 +1,202 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(20, 14.3%, 4.1%);
+  --muted: hsl(60, 4.8%, 95.9%);
+  --muted-foreground: hsl(25, 5.3%, 44.7%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(20, 14.3%, 4.1%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(20, 14.3%, 4.1%);
+  --border: hsl(20, 5.9%, 90%);
+  --input: hsl(20, 5.9%, 90%);
+  --primary: hsl(207, 90%, 54%);
+  --primary-foreground: hsl(211, 100%, 99%);
+  --secondary: hsl(60, 4.8%, 95.9%);
+  --secondary-foreground: hsl(24, 9.8%, 10%);
+  --accent: hsl(60, 4.8%, 95.9%);
+  --accent-foreground: hsl(24, 9.8%, 10%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(60, 9.1%, 97.8%);
+  --ring: hsl(20, 14.3%, 4.1%);
+  --radius: 0.5rem;
+
+  /* AgriFlow ERP Custom Colors */
+  --apple-blue: hsl(207, 100%, 50%);
+  --professional-blue: hsl(213, 76%, 41%);
+  --earth-brown: hsl(38, 21%, 44%);
+  --organic-green: hsl(67, 44%, 25%);
+  --warm-orange: hsl(16, 100%, 60%);
+  --apple-gray: hsl(0, 0%, 28%);
+  --light-gray: hsl(208, 7%, 90%);
+  --success-green: hsl(122, 65%, 48%);
+  --apple-red: hsl(1, 100%, 60%);
+  --apple-orange: hsl(34, 100%, 50%);
+}
+
+.dark {
+  --background: hsl(240, 10%, 3.9%);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsl(240, 3.7%, 15.9%);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+  --popover: hsl(240, 10%, 3.9%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsl(240, 10%, 3.9%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsl(240, 3.7%, 15.9%);
+  --input: hsl(240, 3.7%, 15.9%);
+  --primary: hsl(207, 90%, 54%);
+  --primary-foreground: hsl(211, 100%, 99%);
+  --secondary: hsl(240, 3.7%, 15.9%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --accent: hsl(240, 3.7%, 15.9%);
+  --accent-foreground: hsl(0, 0%, 98%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(240, 4.9%, 83.9%);
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+}
+
+@layer components {
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .dark-glass-effect {
+    background: rgba(30, 30, 30, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .card-shadow {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  }
+
+  .elevated-shadow {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  .metric-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .metric-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-item {
+    transition: all 0.2s ease;
+  }
+
+  .nav-item:hover {
+    background: rgba(0, 122, 255, 0.1);
+  }
+
+  .chart-container {
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+  }
+
+  .pulse-animation {
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+}
+
+@layer utilities {
+  .text-apple-blue {
+    color: var(--apple-blue);
+  }
+  
+  .bg-apple-blue {
+    background-color: var(--apple-blue);
+  }
+  
+  .border-apple-blue {
+    border-color: var(--apple-blue);
+  }
+  
+  .text-professional-blue {
+    color: var(--professional-blue);
+  }
+  
+  .bg-professional-blue {
+    background-color: var(--professional-blue);
+  }
+  
+  .text-earth-brown {
+    color: var(--earth-brown);
+  }
+  
+  .bg-earth-brown {
+    background-color: var(--earth-brown);
+  }
+  
+  .text-organic-green {
+    color: var(--organic-green);
+  }
+  
+  .bg-organic-green {
+    background-color: var(--organic-green);
+  }
+  
+  .text-warm-orange {
+    color: var(--warm-orange);
+  }
+  
+  .bg-warm-orange {
+    background-color: var(--warm-orange);
+  }
+  
+  .text-apple-gray {
+    color: var(--apple-gray);
+  }
+  
+  .bg-apple-gray {
+    background-color: var(--apple-gray);
+  }
+  
+  .text-success-green {
+    color: var(--success-green);
+  }
+  
+  .bg-success-green {
+    background-color: var(--success-green);
+  }
+  
+  .text-apple-red {
+    color: var(--apple-red);
+  }
+  
+  .bg-apple-red {
+    background-color: var(--apple-red);
+  }
+  
+  .text-apple-orange {
+    color: var(--apple-orange);
+  }
+  
+  .bg-apple-orange {
+    background-color: var(--apple-orange);
+  }
+}
