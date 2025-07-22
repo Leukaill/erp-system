@@ -20,9 +20,9 @@ const navigationItems = [
   { name: "Financial Management", href: "/finance", icon: Wallet },
   { name: "Project Management", href: "/projects", icon: FolderKanban },
   { name: "Inventory Management", href: "/inventory", icon: Package },
-  { name: "Farm Operations", href: "/operations", icon: Tractor },
-  { name: "Customer Relations", href: "/customers", icon: Users },
-  { name: "Human Resources", href: "/hr", icon: Bus },
+  { name: "Farm Operations", href: "/farm-operations", icon: Tractor },
+  { name: "Customer Relations", href: "/customer-relations", icon: Users },
+  { name: "Human Resources", href: "/human-resources", icon: Bus },
   { name: "Reports & Analytics", href: "/reports", icon: FileBarChart },
 ];
 

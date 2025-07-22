@@ -51,6 +51,17 @@ export default {
           "4": "var(--chart-4)",
           "5": "var(--chart-5)",
         },
+        // AgriFlow ERP Custom Colors
+        "apple-blue": "hsl(207, 100%, 50%)",
+        "professional-blue": "hsl(213, 76%, 41%)",
+        "earth-brown": "hsl(38, 21%, 44%)",
+        "organic-green": "hsl(67, 44%, 25%)",
+        "warm-orange": "hsl(16, 100%, 60%)",
+        "apple-gray": "hsl(0, 0%, 28%)",
+        "light-gray": "hsl(208, 7%, 90%)",
+        "success-green": "hsl(122, 65%, 48%)",
+        "apple-red": "hsl(1, 100%, 60%)",
+        "apple-orange": "hsl(34, 100%, 50%)",
         sidebar: {
           DEFAULT: "var(--sidebar-background)",
           foreground: "var(--sidebar-foreground)",
