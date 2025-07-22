@@ -77,18 +77,18 @@ export default function Sidebar() {
             <div className="flex items-center p-3 bg-white rounded-xl card-shadow">
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-apple-blue to-professional-blue flex items-center justify-center">
                 <span className="text-white font-semibold text-sm">
-                  {user?.firstName?.charAt(0) || user?.email?.charAt(0) || 'U'}
+                  {(user as any)?.firstName?.charAt(0) || (user as any)?.email?.charAt(0) || 'U'}
                 </span>
               </div>
               <div className="ml-3 min-w-0 flex-1">
                 <p className="text-sm font-medium text-apple-gray">
-                  {user?.firstName && user?.lastName 
-                    ? `${user.firstName} ${user.lastName}`
-                    : user?.email
+                  {(user as any)?.firstName && (user as any)?.lastName 
+                    ? `${(user as any).firstName} ${(user as any).lastName}`
+                    : (user as any)?.email
                   }
                 </p>
                 <p className="text-xs text-gray-500">
-                  {user?.role?.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase()) || 'Farm Manager'}
+                  {(user as any)?.role?.replace('_', ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()) || 'Farm Manager'}
                 </p>
               </div>
               <Button

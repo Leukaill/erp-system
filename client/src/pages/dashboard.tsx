@@ -52,7 +52,7 @@ export default function Dashboard() {
           {/* Welcome Section */}
           <div className="mb-8">
             <h1 className="text-3xl font-semibold text-apple-gray mb-2">
-              Good morning, {user?.firstName || 'Farm Manager'}
+              Good morning, {(user as any)?.firstName || 'Farm Manager'}
             </h1>
             <p className="text-gray-600">
               Here's your farm overview for today, {new Date().toLocaleDateString('en-RW', { 

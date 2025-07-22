@@ -238,25 +238,25 @@ export class DatabaseStorage implements IStorage {
     const cutoffDate = new Date();
     cutoffDate.setMonth(cutoffDate.getMonth() - months);
 
-    const transactions = await db
+    const transactionsList = await db
       .select()
       .from(transactions)
       .where(sql`date >= ${cutoffDate}`)
       .orderBy(desc(transactions.date));
 
-    const totalRevenue = transactions
-      .filter(t => t.type === 'income')
-      .reduce((sum, t) => sum + Number(t.amount), 0);
+    const totalRevenue = transactionsList
+      .filter((t: Transaction) => t.type === 'income')
+      .reduce((sum: number, t: Transaction) => sum + Number(t.amount), 0);
 
-    const totalExpenses = transactions
-      .filter(t => t.type === 'expense')
-      .reduce((sum, t) => sum + Number(t.amount), 0);
+    const totalExpenses = transactionsList
+      .filter((t: Transaction) => t.type === 'expense')
+      .reduce((sum: number, t: Transaction) => sum + Number(t.amount), 0);
 
     return {
       totalRevenue,
       totalExpenses,
       profit: totalRevenue - totalExpenses,
-      transactions,
+      transactions: transactionsList,
     };
   }
 
@@ -287,16 +287,19 @@ export class DatabaseStorage implements IStorage {
 
   // Tasks
   async getTasks(userId: string, status?: string): Promise<Task[]> {
-    let query = db
-      .select()
-      .from(tasks)
-      .where(eq(tasks.assignedTo, userId));
-
     if (status) {
-      query = query.where(eq(tasks.status, status));
+      return await db
+        .select()
+        .from(tasks)
+        .where(and(eq(tasks.assignedTo, userId), eq(tasks.status, status)))
+        .orderBy(desc(tasks.createdAt));
     }
 
-    return await query.orderBy(desc(tasks.createdAt));
+    return await db
+      .select()
+      .from(tasks)
+      .where(eq(tasks.assignedTo, userId))
+      .orderBy(desc(tasks.createdAt));
   }
 
   async getTodaysTasks(userId: string): Promise<Task[]> {

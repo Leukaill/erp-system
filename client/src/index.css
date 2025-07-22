@@ -125,78 +125,90 @@
 
 @layer utilities {
   .text-apple-blue {
-    color: var(--apple-blue);
+    color: hsl(207, 100%, 50%);
   }
   
   .bg-apple-blue {
-    background-color: var(--apple-blue);
+    background-color: hsl(207, 100%, 50%);
   }
   
   .border-apple-blue {
-    border-color: var(--apple-blue);
+    border-color: hsl(207, 100%, 50%);
   }
   
   .text-professional-blue {
-    color: var(--professional-blue);
+    color: hsl(213, 76%, 41%);
   }
   
   .bg-professional-blue {
-    background-color: var(--professional-blue);
+    background-color: hsl(213, 76%, 41%);
   }
   
   .text-earth-brown {
-    color: var(--earth-brown);
+    color: hsl(38, 21%, 44%);
   }
   
   .bg-earth-brown {
-    background-color: var(--earth-brown);
+    background-color: hsl(38, 21%, 44%);
   }
   
   .text-organic-green {
-    color: var(--organic-green);
+    color: hsl(67, 44%, 25%);
   }
   
   .bg-organic-green {
-    background-color: var(--organic-green);
+    background-color: hsl(67, 44%, 25%);
   }
   
   .text-warm-orange {
-    color: var(--warm-orange);
+    color: hsl(16, 100%, 60%);
   }
   
   .bg-warm-orange {
-    background-color: var(--warm-orange);
+    background-color: hsl(16, 100%, 60%);
   }
   
   .text-apple-gray {
-    color: var(--apple-gray);
+    color: hsl(0, 0%, 28%);
   }
   
   .bg-apple-gray {
-    background-color: var(--apple-gray);
+    background-color: hsl(0, 0%, 28%);
+  }
+  
+  .text-light-gray {
+    color: hsl(208, 7%, 90%);
+  }
+  
+  .bg-light-gray {
+    background-color: hsl(208, 7%, 90%);
+  }
+  
+  .border-light-gray {
+    border-color: hsl(208, 7%, 90%);
   }
   
   .text-success-green {
-    color: var(--success-green);
+    color: hsl(122, 65%, 48%);
   }
   
   .bg-success-green {
-    background-color: var(--success-green);
+    background-color: hsl(122, 65%, 48%);
   }
   
   .text-apple-red {
-    color: var(--apple-red);
+    color: hsl(1, 100%, 60%);
   }
   
   .bg-apple-red {
-    background-color: var(--apple-red);
+    background-color: hsl(1, 100%, 60%);
   }
   
   .text-apple-orange {
-    color: var(--apple-orange);
+    color: hsl(34, 100%, 50%);
   }
   
   .bg-apple-orange {
-    background-color: var(--apple-orange);
+    background-color: hsl(34, 100%, 50%);
   }
 }
