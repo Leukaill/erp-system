@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { setupAuth, isAuthenticated } from "./replitAuth";
+import { setupAuth, isAuthenticated } from "./localAuth";
 import { 
   insertProjectSchema, 
   insertInventorySchema, 
@@ -19,9 +19,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Auth routes
   app.get('/api/auth/user', isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
-      const user = await storage.getUser(userId);
-      res.json(user);
+      res.json(req.user);
     } catch (error) {
       console.error("Error fetching user:", error);
       res.status(500).json({ message: "Failed to fetch user" });
@@ -31,7 +29,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Dashboard metrics
   app.get('/api/dashboard/metrics', isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const metrics = await storage.getDashboardMetrics(userId);
       res.json(metrics);
     } catch (error) {
@@ -43,7 +41,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Projects routes
   app.get('/api/projects', isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const projects = await storage.getProjects(userId);
       res.json(projects);
     } catch (error) {
@@ -54,7 +52,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.post('/api/projects', isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const projectData = insertProjectSchema.parse({
         ...req.body,
         managerId: userId,
@@ -124,7 +122,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         description: `Inventory item "${item.name}" has been added to stock`,
         entityType: 'inventory',
         entityId: item.id,
-        userId: req.user.claims.sub,
+        userId: req.user.id,
         priority: 'low'
       });
 
@@ -138,7 +136,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Financial routes
   app.get('/api/financial/summary', isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const months = req.query.months ? parseInt(req.query.months as string) : 12;
       const summary = await storage.getFinancialSummary(userId, months);
       res.json(summary);
@@ -150,7 +148,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.get('/api/transactions', isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const limit = req.query.limit ? parseInt(req.query.limit as string) : 50;
       const transactions = await storage.getTransactions(userId, limit);
       res.json(transactions);
@@ -172,7 +170,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         description: transaction.description || `${transaction.type} transaction recorded`,
         entityType: 'transaction',
         entityId: transaction.id,
-        userId: req.user.claims.sub,
+        userId: req.user.id,
         priority: transaction.type === 'expense' ? 'medium' : 'low'
       });
 
@@ -186,7 +184,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Activities routes
   app.get('/api/activities', isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const limit = req.query.limit ? parseInt(req.query.limit as string) : 20;
       const activities = await storage.getRecentActivities(userId, limit);
       res.json(activities);
@@ -199,7 +197,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Tasks routes
   app.get('/api/tasks', isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const status = req.query.status as string;
       const tasks = await storage.getTasks(userId, status);
       res.json(tasks);
@@ -211,7 +209,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.get('/api/tasks/today', isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const tasks = await storage.getTodaysTasks(userId);
       res.json(tasks);
     } catch (error) {
@@ -224,7 +222,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const taskData = insertTaskSchema.parse({
         ...req.body,
-        assignedTo: req.user.claims.sub,
+        assignedTo: req.user.id,
       });
       const task = await storage.createTask(taskData);
       res.json(task);

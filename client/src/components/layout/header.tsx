@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Bell, Search, Plus, Menu, ChevronRight } from "lucide-react";
+import { Bell, Search, Plus, Menu, ChevronRight, User, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -9,10 +9,49 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useAuth } from "../../hooks/useAuth";
+import { useMutation } from "@tanstack/react-query";
+import { apiRequest, queryClient } from "../../lib/queryClient";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Header() {
   const [searchQuery, setSearchQuery] = useState("");
   const [language, setLanguage] = useState("en");
+  const { user } = useAuth();
+  const { toast } = useToast();
+
+  const logoutMutation = useMutation({
+    mutationFn: async () => {
+      const response = await apiRequest("POST", "/api/logout");
+      return response;
+    },
+    onSuccess: () => {
+      queryClient.setQueryData(["/api/auth/user"], null);
+      toast({
+        title: "Logged out",
+        description: "You have been successfully logged out",
+      });
+      window.location.href = "/auth";
+    },
+    onError: () => {
+      toast({
+        title: "Logout failed",
+        description: "Please try again",
+        variant: "destructive",
+      });
+    },
+  });
+
+  const handleLogout = () => {
+    logoutMutation.mutate();
+  };
 
   return (
     <header className="glass-effect border-b border-light-gray px-6 py-4">
@@ -66,6 +105,29 @@ export default function Header() {
             <Plus className="mr-2 h-4 w-4" />
             Quick Add
           </Button>
+
+          {/* User Menu */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="sm" className="flex items-center space-x-2 text-gray-700 hover:text-apple-blue">
+                <User className="text-lg" />
+                <span className="hidden md:block text-sm font-medium">
+                  {user?.firstName || 'User'}
+                </span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-56">
+              <div className="px-3 py-2">
+                <p className="text-sm font-medium">{user?.firstName} {user?.lastName}</p>
+                <p className="text-xs text-gray-500">{user?.email}</p>
+              </div>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={handleLogout} disabled={logoutMutation.isPending}>
+                <LogOut className="mr-2 h-4 w-4" />
+                {logoutMutation.isPending ? "Logging out..." : "Logout"}
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
     </header>

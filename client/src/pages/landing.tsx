@@ -4,7 +4,7 @@ import { Sprout, BarChart3, Package, Users, MapPin, TrendingUp, Folder } from "l
 
 export default function Landing() {
   const handleLogin = () => {
-    window.location.href = "/api/login";
+    window.location.href = "/auth";
   };
 
   return (

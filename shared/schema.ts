@@ -27,10 +27,11 @@ export const sessions = pgTable(
   (table) => [index("IDX_session_expire").on(table.expire)],
 );
 
-// User storage table for Replit Auth
+// User storage table for Local Auth
 export const users = pgTable("users", {
   id: varchar("id").primaryKey().notNull(),
-  email: varchar("email").unique(),
+  email: varchar("email").unique().notNull(),
+  password: varchar("password"), // For local auth
   firstName: varchar("first_name"),
   lastName: varchar("last_name"),
   profileImageUrl: varchar("profile_image_url"),
@@ -239,4 +240,20 @@ export const insertFarmSectorSchema = createInsertSchema(farmSectors).omit({
   id: true,
   createdAt: true,
   updatedAt: true,
+});
+
+// User authentication schemas
+export const registerUserSchema = createInsertSchema(users, {
+  email: z.string().email(),
+  password: z.string().min(6),
+}).pick({
+  email: true,
+  password: true,
+  firstName: true,
+  lastName: true,
+});
+
+export const loginUserSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(1),
 });
