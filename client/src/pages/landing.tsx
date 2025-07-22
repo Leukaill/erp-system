@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Sprout, BarChart3, Package, Users, MapPin, TrendingUp } from "lucide-react";
+import { Sprout, BarChart3, Package, Users, MapPin, TrendingUp, Folder } from "lucide-react";
 
 export default function Landing() {
   const handleLogin = () => {
@@ -49,80 +49,86 @@ export default function Landing() {
 
         {/* Features Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-          <Card className="metric-card bg-white elevated-shadow border-0">
+          {/* Financial Management */}
+          <Card className="metric-card bg-white elevated-shadow border-0 hover:shadow-lg transition-all duration-300">
             <CardContent className="p-6">
-              <div className="w-12 h-12 bg-success-green bg-opacity-10 rounded-xl flex items-center justify-center mb-4">
-                <BarChart3 className="text-success-green text-xl" />
+              <div className="w-12 h-12 bg-success-green rounded-xl flex items-center justify-center mb-4">
+                <BarChart3 className="text-white text-xl" />
               </div>
-              <h3 className="text-xl font-semibold text-apple-gray mb-2">Financial Management</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-semibold text-apple-gray mb-3">Financial Management</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
                 Complete financial tracking with RWF currency support, budgeting, expense tracking, 
                 and detailed profit/loss analysis for your farming operations.
               </p>
             </CardContent>
           </Card>
 
-          <Card className="metric-card bg-white elevated-shadow border-0">
+          {/* Project Management */}
+          <Card className="metric-card bg-white elevated-shadow border-0 hover:shadow-lg transition-all duration-300">
             <CardContent className="p-6">
-              <div className="w-12 h-12 bg-apple-blue bg-opacity-10 rounded-xl flex items-center justify-center mb-4">
-                <MapPin className="text-apple-blue text-xl" />
+              <div className="w-12 h-12 bg-apple-blue rounded-xl flex items-center justify-center mb-4">
+                <Folder className="text-white text-xl" />
               </div>
-              <h3 className="text-xl font-semibold text-apple-gray mb-2">Project Management</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-semibold text-apple-gray mb-3">Project Management</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
                 Plan and track crop seasons, manage tasks with Gantt charts, monitor milestones, 
                 and coordinate farm activities across multiple locations.
               </p>
             </CardContent>
           </Card>
 
-          <Card className="metric-card bg-white elevated-shadow border-0">
+          {/* Inventory Control */}
+          <Card className="metric-card bg-white elevated-shadow border-0 hover:shadow-lg transition-all duration-300">
             <CardContent className="p-6">
-              <div className="w-12 h-12 bg-warm-orange bg-opacity-10 rounded-xl flex items-center justify-center mb-4">
-                <Package className="text-warm-orange text-xl" />
+              <div className="w-12 h-12 bg-warm-orange rounded-xl flex items-center justify-center mb-4">
+                <Package className="text-white text-xl" />
               </div>
-              <h3 className="text-xl font-semibold text-apple-gray mb-2">Inventory Control</h3>
-              <p className="text-gray-600">
-                Track seeds, fertilizers, and equipment with automated reorder alerts. 
-                Monitor stock levels and optimize inventory management.
+              <h3 className="text-xl font-semibold text-apple-gray mb-3">Inventory Control</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Track seeds, fertilizers, and equipment with automated reorder alerts. Monitor stock levels 
+                and optimize inventory management.
               </p>
             </CardContent>
           </Card>
 
-          <Card className="metric-card bg-white elevated-shadow border-0">
+          {/* Farm Operations */}
+          <Card className="metric-card bg-white elevated-shadow border-0 hover:shadow-lg transition-all duration-300">
             <CardContent className="p-6">
-              <div className="w-12 h-12 bg-organic-green bg-opacity-10 rounded-xl flex items-center justify-center mb-4">
-                <Sprout className="text-organic-green text-xl" />
+              <div className="w-12 h-12 bg-organic-green rounded-xl flex items-center justify-center mb-4">
+                <Sprout className="text-white text-xl" />
               </div>
-              <h3 className="text-xl font-semibold text-apple-gray mb-2">Farm Operations</h3>
-              <p className="text-gray-600">
-                Real-time dashboard with field monitoring, harvest tracking, and integrated 
-                Rwanda crop calendar for optimal farming decisions.
+              <h3 className="text-xl font-semibold text-apple-gray mb-3">Farm Operations</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Real-time dashboard with field monitoring, harvest tracking, and integrated Rwanda crop 
+                calendar for optimal farming decisions.
               </p>
             </CardContent>
           </Card>
 
-          <Card className="metric-card bg-white elevated-shadow border-0">
+          {/* Team Management */}
+          <Card className="metric-card bg-white elevated-shadow border-0 hover:shadow-lg transition-all duration-300">
             <CardContent className="p-6">
-              <div className="w-12 h-12 bg-professional-blue bg-opacity-10 rounded-xl flex items-center justify-center mb-4">
-                <Users className="text-professional-blue text-xl" />
+              <div className="w-12 h-12 bg-professional-blue rounded-xl flex items-center justify-center mb-4">
+                <Users className="text-white text-xl" />
               </div>
-              <h3 className="text-xl font-semibold text-apple-gray mb-2">Team Management</h3>
-              <p className="text-gray-600">
-                Manage farm workers, assign tasks, track performance, and handle customer 
-                relationships with suppliers and buyers.
+              <h3 className="text-xl font-semibold text-apple-gray mb-3">Team Management</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Manage farm workers, assign tasks, track performance, and handle customer relationships 
+                with suppliers and buyers.
               </p>
             </CardContent>
           </Card>
 
-          <Card className="metric-card bg-white elevated-shadow border-0">
+          {/* Analytics & Reports */}
+          <Card className="metric-card bg-white elevated-shadow border-0 hover:shadow-lg transition-all duration-300">
             <CardContent className="p-6">
-              <div className="w-12 h-12 bg-apple-red bg-opacity-10 rounded-xl flex items-center justify-center mb-4">
-                <TrendingUp className="text-apple-red text-xl" />
+              <div className="w-12 h-12 bg-apple-red rounded-xl flex items-center justify-center mb-4">
+                <TrendingUp className="text-white text-xl" />
               </div>
-              <h3 className="text-xl font-semibold text-apple-gray mb-2">Analytics & Reports</h3>
-              <p className="text-gray-600">
-                Comprehensive reporting with data visualization, export capabilities, 
-                and detailed analytics to drive informed business decisions.
+              <h3 className="text-xl font-semibold text-apple-gray mb-3">Analytics & Reports</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Comprehensive reporting with data visualization, export capabilities, and detailed analytics to 
+                drive informed business decisions.
               </p>
             </CardContent>
           </Card>
