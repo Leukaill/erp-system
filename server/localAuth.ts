@@ -17,10 +17,21 @@ export async function hashPassword(password: string): Promise<string> {
 }
 
 async function comparePasswords(supplied: string, stored: string): Promise<boolean> {
-  const [hashed, salt] = stored.split(".");
-  const hashedBuf = Buffer.from(hashed, "hex");
-  const suppliedBuf = (await scryptAsync(supplied, salt, 64)) as Buffer;
-  return timingSafeEqual(hashedBuf, suppliedBuf);
+  try {
+    const [hashed, salt] = stored.split(".");
+    if (!hashed || !salt) {
+      console.error("Invalid password format:", stored);
+      return false;
+    }
+    const hashedBuf = Buffer.from(hashed, "hex");
+    const suppliedBuf = (await scryptAsync(supplied, salt, 64)) as Buffer;
+    const result = timingSafeEqual(hashedBuf, suppliedBuf);
+    console.log("Password comparison:", { supplied: supplied.substring(0, 3) + "...", result });
+    return result;
+  } catch (error) {
+    console.error("Password comparison error:", error);
+    return false;
+  }
 }
 
 export function getSession() {
@@ -63,18 +74,24 @@ export async function setupAuth(app: Express) {
     },
     async (email, password, done) => {
       try {
+        console.log("Login attempt for:", email);
         const user = await storage.getUserByEmail(email);
         if (!user) {
+          console.log("User not found:", email);
           return done(null, false, { message: 'User not found' });
         }
 
+        console.log("User found, checking password...");
         const isValid = await comparePasswords(password, user.password || '');
         if (!isValid) {
+          console.log("Password invalid for user:", email);
           return done(null, false, { message: 'Invalid password' });
         }
 
+        console.log("Login successful for:", email);
         return done(null, user);
       } catch (error) {
+        console.error("Login error:", error);
         return done(error);
       }
     }
